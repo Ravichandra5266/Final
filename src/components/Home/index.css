@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+}
+.close-icon {
+  font-size: 20px;
+}
+
+.search-light {
+  color: white;
+}
+
+.search-dark {
+  color: black;
+}

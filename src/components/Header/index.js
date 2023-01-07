@@ -2,6 +2,12 @@ import {RiMoonClearFill} from 'react-icons/ri'
 
 import {BsSun} from 'react-icons/bs'
 
+import Popup from 'reactjs-popup'
+
+import Cookies from 'js-cookie'
+
+import {withRouter} from 'react-router-dom'
+
 import ContextMessage from '../../context/ContextMessage'
 
 import {
@@ -11,12 +17,36 @@ import {
   HeadPageItem,
   ThemeBtn,
   ProfileImg,
+  LogoutBtn,
+  PopupContainer,
+  PopupDescription,
+  FlexContainer,
+  CloseBtn,
+  ConfirmBtn,
 } from './styledComponents'
 
-const Header = () => (
+import './index.css'
+
+const Header = props => (
   <ContextMessage.Consumer>
     {value => {
       const {isDarkMode, onChangeTheme} = value
+      const ThemeIconsColor = isDarkMode
+        ? 'light-theme-icon'
+        : 'dark-theme-icon'
+
+      const onClickChangeTheme = () => {
+        onChangeTheme()
+      }
+
+      const onClickLogout = () => {
+        Cookies.remove('jwtToken')
+
+        const {history} = props
+
+        history.replace('/login')
+      }
+
       return (
         <HeadPageContainer isDarkMode={isDarkMode}>
           {isDarkMode ? (
@@ -32,11 +62,11 @@ const Header = () => (
           )}
           <HeadPageListItemsContainer>
             <HeadPageItem>
-              <ThemeBtn type="button">
+              <ThemeBtn type="button" onClick={onClickChangeTheme}>
                 {isDarkMode ? (
-                  <RiMoonClearFill className="dark-icon" />
+                  <BsSun className={ThemeIconsColor} />
                 ) : (
-                  <BsSun className="light-icon" />
+                  <RiMoonClearFill className={ThemeIconsColor} />
                 )}
               </ThemeBtn>
             </HeadPageItem>
@@ -46,6 +76,36 @@ const Header = () => (
                 alt="profile"
               />
             </HeadPageItem>
+            <HeadPageItem>
+              <Popup
+                modal
+                trigger={<LogoutBtn type="button">Logout</LogoutBtn>}
+              >
+                {close => (
+                  <PopupContainer isDarkMode={isDarkMode}>
+                    <PopupDescription isDarkMode={isDarkMode}>
+                      Are you sure,you want to logout?
+                    </PopupDescription>
+                    <FlexContainer>
+                      <CloseBtn
+                        type="button"
+                        isDarkMode={isDarkMode}
+                        onClick={() => close()}
+                      >
+                        Close
+                      </CloseBtn>
+                      <ConfirmBtn
+                        type="button"
+                        isDarkMode={isDarkMode}
+                        onClick={onClickLogout}
+                      >
+                        Conform
+                      </ConfirmBtn>
+                    </FlexContainer>
+                  </PopupContainer>
+                )}
+              </Popup>
+            </HeadPageItem>
           </HeadPageListItemsContainer>
         </HeadPageContainer>
       )
@@ -53,4 +113,4 @@ const Header = () => (
   </ContextMessage.Consumer>
 )
 
-export default Header
+export default withRouter(Header)

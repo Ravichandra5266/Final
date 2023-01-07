@@ -6,7 +6,17 @@ import Login from './components/Login'
 
 import Home from './components/Home'
 
+import Trending from './components/Trending'
+
+import Gaming from './components/Gaming'
+
+import SavedVideos from './components/SavedVideos'
+
+import NotFound from './components/NotFound'
+
 import ProtectedRoutes from './components/ProtectedRoutes'
+
+import VideoItemDetails from './components/VideoItemDetails'
 
 import ContextMessage from './context/ContextMessage'
 
@@ -14,25 +24,42 @@ import './App.css'
 
 class App extends Component {
   state = {
-    isDarkMode: false,
+    isDarkMode: true,
+    activeTab: 'Home',
   }
 
   onChangeTheme = () => {
-    this.setState({isDarkMode: true})
+    const {isDarkMode} = this.state
+    this.setState({isDarkMode: !isDarkMode})
+  }
+
+  onChangeTab = tabId => {
+    this.setState({activeTab: tabId})
   }
 
   render() {
-    const {isDarkMode} = this.state
+    const {isDarkMode, activeTab} = this.state
     return (
       <ContextMessage.Provider
         value={{
           isDarkMode,
           onChangeTheme: this.onChangeTheme,
+          activeTab,
+          onChangeTab: this.onChangeTab,
         }}
       >
         <Switch>
           <Route exact path="/login" component={Login} />
           <ProtectedRoutes exact path="/" component={Home} />
+          <ProtectedRoutes exact path="/trending" component={Trending} />
+          <ProtectedRoutes exact path="/gaming" component={Gaming} />
+          <ProtectedRoutes exact path="/saved-videos" component={SavedVideos} />
+          <ProtectedRoutes
+            exact
+            path="/videos/:id"
+            component={VideoItemDetails}
+          />
+          <ProtectedRoutes component={NotFound} />
         </Switch>
       </ContextMessage.Provider>
     )

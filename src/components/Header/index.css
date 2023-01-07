@@ -1,0 +1,15 @@
+body {
+  margin: 0;
+}
+
+.light-theme-icon {
+  color: white;
+  font-size: 25px;
+  margin-top: 5px;
+}
+
+.dark-theme-icon {
+  color: black;
+  font-size: 25px;
+  margin-top: 5px;
+}
