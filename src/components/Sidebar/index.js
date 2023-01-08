@@ -10,7 +10,6 @@ import {
   SidebarPageContainer,
   FlexContainer,
   SidebarMenuText,
-  SidebarMenuBtn,
   SidebarTopContainer,
   SidebarBottomContainer,
   SidebarBottomHeading,
@@ -24,8 +23,6 @@ const Sidebar = () => (
   <ContextMessage.Consumer>
     {value => {
       const {isDarkMode, activeTab, onChangeTab} = value
-
-      const iconColor = isDarkMode ? 'white' : 'black'
 
       const onClickHome = () => {
         onChangeTab('Home')

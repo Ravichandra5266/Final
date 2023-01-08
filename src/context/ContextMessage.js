@@ -5,6 +5,8 @@ const ContextMessage = React.createContext({
   onChangeTheme: () => {},
   activeTab: 'Home',
   onChangeTab: () => {},
+  savedVideos: [],
+  onSaveVideo: () => {},
 })
 
 export default ContextMessage

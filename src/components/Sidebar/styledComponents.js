@@ -4,7 +4,7 @@ export const SidebarPageContainer = styled.div`
   display: none;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 100vh;
+  min-height: 90vh;
   width: 30%;
   padding: 10px;
   background-color: ${props => (props.isDarkMode ? '#181818' : '#f9f9f9')};

@@ -25,7 +25,8 @@ import './App.css'
 class App extends Component {
   state = {
     isDarkMode: true,
-    activeTab: 'Home',
+    activeTab: '',
+    savedVideos: [],
   }
 
   onChangeTheme = () => {
@@ -37,8 +38,12 @@ class App extends Component {
     this.setState({activeTab: tabId})
   }
 
+  onSaveVideo = eachItemVideo => {
+    console.log(eachItemVideo)
+  }
+
   render() {
-    const {isDarkMode, activeTab} = this.state
+    const {isDarkMode, activeTab, savedVideos} = this.state
     return (
       <ContextMessage.Provider
         value={{
@@ -46,6 +51,8 @@ class App extends Component {
           onChangeTheme: this.onChangeTheme,
           activeTab,
           onChangeTab: this.onChangeTab,
+          savedVideos,
+          onSaveVideo: this.onSaveVideo,
         }}
       >
         <Switch>

@@ -38,26 +38,136 @@ export const VideoTitle = styled.h1`
   font-weight: bold;
   font-family: roboto;
 `
-export const FlexContainer1 = styled.div`
+export const FlexContainerViewPost = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @media screen and (min-width: 768px) {
+    justify-content: flex-start;
+  }
+`
+export const VideoViews = styled.p`
+  color: ${props => (props.isDarkMode ? 'white' : 'black')};
+  font-size: 15px;
+  font-weight: 500;
+  font-family: roboto;
+`
+export const VideoPost = styled.p`
+  color: ${props => (props.isDarkMode ? 'white' : 'black')};
+  font-size: 15px;
+  font-weight: 500;
+  font-family: roboto;
+  @media screen and (min-width: 768px) {
+    margin-left: 25px;
+  }
+`
+export const VideoLikeDislikeSaveControls = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
 `
-export const FlexConatainer2 = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-`
-export const VideoCount = styled.p`
-  color: ${props => (props.isDarkMode ? 'white' : 'black')};
-  font-size: 15px;
-  font-weight: 500;
-  font-family: roboto;
-`
-export const VideoPublished = styled.p`
-  color: ${props => (props.isDarkMode ? 'white' : 'black')};
+export const LikeText = styled.p`
+  color: ${props => props.likeText};
   font-size: 15px;
   font-weight: 500;
   font-family: roboto;
   margin-left: 10px;
+`
+export const LikeButton = styled.button`
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+`
+export const DislikeText = styled.p`
+  color: ${props => props.disLikeText};
+  font-size: 15px;
+  font-weight: 500;
+  font-family: roboto;
+  margin-left: 10px;
+`
+export const DislikeButton = styled.button`
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+`
+
+export const SaveText = styled.p`
+  color: ${props => props.saveText};
+  font-size: 15px;
+  font-weight: 500;
+  font-family: roboto;
+  margin-left: 10px;
+`
+export const SaveButton = styled.button`
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+`
+
+export const LikeContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: ${props => props.likeText};
+`
+export const DislikeContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: ${props => props.disLikeText};
+`
+
+export const SaveContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: ${props => props.saveText};
+`
+
+export const ControlContentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+`
+export const BottomVideoContentContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: 15px;
+`
+export const BottomLogo = styled.img`
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  @media screen and (min-width: 768px) {
+    width: 80px;
+    height: 80px;
+  }
+`
+export const BottomContentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+export const BottomTitle = styled.h1`
+  color: ${props => (props.isDarkMode ? 'white' : 'black')};
+  font-size: 18px;
+  font-weight: bold;
+  font-family: roboto;
+  margin: 0px;
+`
+export const BottomSubscriber = styled.p`
+  color: ${props => (props.isDarkMode ? 'white' : 'black')};
+  font-size: 14px;
+  font-weight: 500;
+  font-family: roboto;
+`
+export const BottomDescription = styled.p`
+  color: ${props => (props.isDarkMode ? 'white' : 'black')};
+  font-size: 15px;
+  font-weight: 800;
+  font-family: roboto;
 `

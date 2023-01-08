@@ -1,0 +1,12 @@
+.control-icons {
+  font-size: 20px;
+}
+@media (min-width: 768px) {
+  .control-icons {
+    font-size: 30px;
+  }
+}
+.hr-line {
+  border: 1px solid white #cbd5e1;
+  width: 100%;
+}

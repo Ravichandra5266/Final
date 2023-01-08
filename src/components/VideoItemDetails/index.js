@@ -19,16 +19,34 @@ import {
   VideoItemContainer,
   VideoContentContainer,
   SpinnerContainer,
-  FlexContainer1,
-  VideoCount,
+  FlexContainerViewPost,
   VideoTitle,
-  VideoPublished,
-  FlexConatainer2,
+  VideoViews,
+  VideoPost,
+  VideoLikeDislikeSaveControls,
+  SaveContainer,
+  ControlContentContainer,
+  SaveButton,
+  DislikeText,
+  DislikeButton,
+  LikeButton,
+  LikeText,
+  SaveText,
+  LikeContainer,
+  DislikeContainer,
+  BottomVideoContentContainer,
+  BottomLogo,
+  BottomContentContainer,
+  BottomTitle,
+  BottomSubscriber,
+  BottomDescription,
 } from './styledComponents'
 
 import Header from '../Header'
 
 import Sidebar from '../Sidebar'
+
+import './index.css'
 
 const ApiStatusConstant = {
   initial: 'INITIAL',
@@ -41,6 +59,9 @@ class VideoItemDetails extends Component {
   state = {
     videoDetails: [],
     urlStatus: ApiStatusConstant.initial,
+    isLike: false,
+    isDislike: false,
+    isSave: false,
   }
 
   componentDidMount() {
@@ -88,7 +109,7 @@ class VideoItemDetails extends Component {
         viewCount: data.view_count,
         publishedAt: data.published_at,
         videoUrl: data.video_url,
-        thumbanailUrl: data.thumbanail_url,
+        thumbnailUrl: data.thumbnail_url,
       }
 
       this.setState({
@@ -104,35 +125,94 @@ class VideoItemDetails extends Component {
     </SpinnerContainer>
   )
 
+  onClickLike = () => {
+    const {isLike} = this.state
+    this.setState({isLike: !isLike})
+  }
+
+  onClickDislike = () => {
+    const {isDislike} = this.state
+    this.setState({isDislike: !isDislike})
+  }
+
   renderSuccessView = () => {
     const {videoDetails} = this.state
     const posted = formatDistanceToNow(new Date(videoDetails.publishedAt))
     return (
       <ContextMessage.Consumer>
         {value => {
-          const {isDarkMode} = value
+          const {isDarkMode, onSaveVideo} = value
+          const {isSave, isLike, isDislike} = this.state
+          const textColor = isDarkMode ? '#64748b' : '#64748b'
+          const saveText = isSave ? ' #2563eb' : `${textColor}`
+          const likeText = isLike ? ' #2563eb' : `${textColor}`
+          const disLikeText = isDislike ? ' #2563eb' : `${textColor}`
+
+          this.onClickSave = () => {
+            this.setState({isSave: !isSave})
+            onSaveVideo({...videoDetails})
+          }
+
           return (
             <VideoContentContainer isDarkMode={isDarkMode}>
               <ReactPlayer
                 url={videoDetails.videoUrl}
                 width="100%"
                 height="300px"
-                controls="true"
+                controls
                 style={{padding: '10px'}}
               />
               <VideoTitle isDarkMode={isDarkMode}>
                 {videoDetails.title}
               </VideoTitle>
-              <FlexContainer1>
-                <FlexConatainer2>
-                  <VideoCount
-                    isDarkMode={isDarkMode}
-                  >{`${videoDetails.viewCount} views`}</VideoCount>
-                  <VideoPublished isDarkMode={isDarkMode}>
-                    {posted}
-                  </VideoPublished>
-                </FlexConatainer2>
-              </FlexContainer1>
+              <ControlContentContainer>
+                <FlexContainerViewPost>
+                  <VideoViews isDarkMode={isDarkMode}>
+                    {`${videoDetails.viewCount} views`}
+                  </VideoViews>
+                  <VideoPost isDarkMode={isDarkMode}>{posted}</VideoPost>
+                </FlexContainerViewPost>
+                <VideoLikeDislikeSaveControls>
+                  <LikeButton type="button" onClick={this.onClickLike}>
+                    <LikeContainer likeText={likeText}>
+                      <BiLike className="control-icons" />
+                      <LikeText>Like</LikeText>
+                    </LikeContainer>
+                  </LikeButton>
+
+                  <DislikeButton type="button" onClick={this.onClickDislike}>
+                    <DislikeContainer disLikeText={disLikeText}>
+                      <BiDislike className="control-icons" />
+                      <DislikeText>Dislike</DislikeText>
+                    </DislikeContainer>
+                  </DislikeButton>
+
+                  <SaveButton type="button" onClick={this.onClickSave}>
+                    <SaveContainer saveText={saveText}>
+                      <GiSave className="control-icons" />
+                      <SaveText>Save</SaveText>
+                    </SaveContainer>
+                  </SaveButton>
+                </VideoLikeDislikeSaveControls>
+              </ControlContentContainer>
+              <hr className="hr-line" />
+              <BottomVideoContentContainer>
+                <BottomLogo
+                  src={videoDetails.profileImageUrl}
+                  alt={videoDetails.name}
+                />
+                <BottomContentContainer>
+                  <BottomTitle isDarkMode={isDarkMode}>
+                    {videoDetails.name}
+                  </BottomTitle>
+                  <BottomSubscriber isDarkMode={isDarkMode}>
+                    {`${videoDetails.subscriberCount} subscribers`}
+                  </BottomSubscriber>
+                  <BottomDescription isDarkMode={isDarkMode}>
+                    {videoDetails.description}
+                  </BottomDescription>
+                </BottomContentContainer>
+              </BottomVideoContentContainer>
             </VideoContentContainer>
           )
         }}
