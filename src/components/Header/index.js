@@ -6,7 +6,7 @@ import Popup from 'reactjs-popup'
 
 import Cookies from 'js-cookie'
 
-import {withRouter} from 'react-router-dom'
+import {withRouter, Link} from 'react-router-dom'
 
 import ContextMessage from '../../context/ContextMessage'
 
@@ -49,20 +49,26 @@ const Header = props => (
 
       return (
         <HeadPageContainer isDarkMode={isDarkMode}>
-          {isDarkMode ? (
-            <HeadPageLogo
-              src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-dark-theme-img.png"
-              alt="website logo"
-            />
-          ) : (
-            <HeadPageLogo
-              src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-              alt="website logo"
-            />
-          )}
+          <Link to="/">
+            {isDarkMode ? (
+              <HeadPageLogo
+                src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-dark-theme-img.png"
+                alt="website logo"
+              />
+            ) : (
+              <HeadPageLogo
+                src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
+                alt="website logo"
+              />
+            )}
+          </Link>
           <HeadPageListItemsContainer>
             <HeadPageItem>
-              <ThemeBtn type="button" onClick={onClickChangeTheme}>
+              <ThemeBtn
+                type="button"
+                onClick={onClickChangeTheme}
+                data-testid="theme"
+              >
                 {isDarkMode ? (
                   <BsSun className={ThemeIconsColor} />
                 ) : (
@@ -84,7 +90,7 @@ const Header = props => (
                 {close => (
                   <PopupContainer isDarkMode={isDarkMode}>
                     <PopupDescription isDarkMode={isDarkMode}>
-                      Are you sure,you want to logout?
+                      Are you sure, you want to logout
                     </PopupDescription>
                     <FlexContainer>
                       <CloseBtn
@@ -92,14 +98,14 @@ const Header = props => (
                         isDarkMode={isDarkMode}
                         onClick={() => close()}
                       >
-                        Close
+                        Cancel
                       </CloseBtn>
                       <ConfirmBtn
                         type="button"
                         isDarkMode={isDarkMode}
                         onClick={onClickLogout}
                       >
-                        Conform
+                        Confirm
                       </ConfirmBtn>
                     </FlexContainer>
                   </PopupContainer>

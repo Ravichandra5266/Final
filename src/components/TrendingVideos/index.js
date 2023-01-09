@@ -25,7 +25,7 @@ const TrendingVideos = props => {
     name,
     id,
   } = eachVideo
-  console.log(eachVideo)
+  //   console.log(eachVideo)
   return (
     <ContextMessage.Consumer>
       {value => {
@@ -33,7 +33,7 @@ const TrendingVideos = props => {
         return (
           <TrendingVideoItem>
             <Link to={`/videos/${id}`} className="link-route">
-              <ThumbnailImg src={thumbnailUrl} alt={name} />
+              <ThumbnailImg src={thumbnailUrl} alt="video thumbnail" />
               <FlexContainer>
                 <Logo src={profileImageUrl} alt={name} />
                 <Content>

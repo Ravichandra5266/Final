@@ -39,9 +39,9 @@ const VideoDetails = props => {
         return (
           <VideoContainer isDarkMode={isDarkMode}>
             <Link to={`/videos/${id}`} className="video-route-link">
-              <VideoImg src={thumbnailUrl} alt={title} />
+              <VideoImg src={thumbnailUrl} alt="video thumbnail" />
               <FlexContainer>
-                <VideoLogo src={profileImageUrl} alt={title} />
+                <VideoLogo src={profileImageUrl} alt="channel logo" />
                 <VideoContentText>
                   <VideoTitle isDarkMode={isDarkMode}>{title}</VideoTitle>
                   <VideoSubTitle isDarkMode={isDarkMode}>{name}</VideoSubTitle>

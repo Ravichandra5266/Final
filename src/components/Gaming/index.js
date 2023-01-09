@@ -25,6 +25,11 @@ import {
   GameImg,
   GameTitle,
   GameSubTitle,
+  FailureViewContainer,
+  FailureImg,
+  Title,
+  Description,
+  RetryBtn,
 } from './styledComponents'
 
 import './index.css'
@@ -85,11 +90,43 @@ class Gaming extends Component {
         urlStatus: ApiStatusConstant.success,
         gamingDetailsData: updatedData,
       })
+    } else {
+      this.setState({urlStatus: ApiStatusConstant.failure})
     }
   }
 
+  onClickRetryPage = () => {
+    this.getGamingVideosApiUrl()
+  }
+
+  renderFailureView = () => (
+    <ContextMessage.Consumer>
+      {value => {
+        const {isDarkMode} = value
+        return (
+          <FailureViewContainer isDarkMode={isDarkMode}>
+            {isDarkMode ? (
+              <FailureImg
+                src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
+                alt="failure view"
+              />
+            ) : (
+              <FailureImg
+                src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
+                alt="failure view"
+              />
+            )}
+            <Title>Oops! Something Went Wrong</Title>
+            <Description>We are having some trouble</Description>
+            <RetryBtn onClick={this.onClickRetryPage}>Retry</RetryBtn>
+          </FailureViewContainer>
+        )
+      }}
+    </ContextMessage.Consumer>
+  )
+
   renderSpinnerView = () => (
-    <SpinnerContainer>
+    <SpinnerContainer data-testid="loader">
       <Loader type="ThreeDots" color="blue" height="50" width="50" />
     </SpinnerContainer>
   )
@@ -112,7 +149,7 @@ class Gaming extends Component {
                   <Link to={`/videos/${eachVideo.id}`} className="route-link">
                     <GameImg
                       src={eachVideo.thumbnailUrl}
-                      alt={eachVideo.title}
+                      alt="video thumbnail"
                     />
                     <GameTitle isDarkMode={isDarkMode}>
                       {eachVideo.title}
@@ -161,9 +198,9 @@ class Gaming extends Component {
           return (
             <>
               <Header />
-              <Container isDarkMode={isDarkMode}>
+              <Container data-testid="gaming" isDarkMode={isDarkMode}>
                 <Sidebar />
-                <GamingContainer isDarkMode={isDarkMode}>
+                <GamingContainer data-testid="gaming" isDarkMode={isDarkMode}>
                   {this.renderSwitchCondition()}
                 </GamingContainer>
               </Container>

@@ -119,11 +119,11 @@ const Sidebar = () => (
               />
               <SidebarBottomImg
                 src="https://assets.ccbp.in/frontend/react-js/nxt-watch-linked-in-logo-img.png"
-                alt="linked in"
+                alt="linked in logo"
               />
             </FlexContainer>
             <SidebarBottomDescription isDarkMode={isDarkMode}>
-              Enjoy!Now to see your channels and recommendations!
+              Enjoy! Now to see your channels and recommendations!
             </SidebarBottomDescription>
           </SidebarBottomContainer>
         </SidebarPageContainer>

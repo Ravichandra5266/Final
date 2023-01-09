@@ -1,0 +1,17 @@
+.icons {
+  color: red;
+  font-size: 20px;
+}
+@media (min-width: 768px) {
+  .icons {
+    font-size: 30px;
+  }
+}
+.light {
+  text-decoration: none;
+  color: white;
+}
+.black {
+  text-decoration: none;
+  color: black;
+}

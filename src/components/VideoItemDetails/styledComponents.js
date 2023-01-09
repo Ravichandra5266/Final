@@ -32,7 +32,7 @@ export const SpinnerContainer = styled.div`
   justify-content: center;
   margin: auto;
 `
-export const VideoTitle = styled.h1`
+export const VideoTitle = styled.p`
   color: ${props => (props.isDarkMode ? 'white' : 'black')};
   font-size: 20px;
   font-weight: bold;
@@ -77,6 +77,7 @@ export const LikeButton = styled.button`
   border: none;
   background-color: transparent;
   cursor: pointer;
+  color: ${props => props.likeText};
 `
 export const DislikeText = styled.p`
   color: ${props => props.disLikeText};
@@ -89,6 +90,7 @@ export const DislikeButton = styled.button`
   border: none;
   background-color: transparent;
   cursor: pointer;
+  color: ${props => props.disLikeText};
 `
 
 export const SaveText = styled.p`
@@ -102,13 +104,13 @@ export const SaveButton = styled.button`
   border: none;
   background-color: transparent;
   cursor: pointer;
+  color: ${props => props.saveText};
 `
 
 export const LikeContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  color: ${props => props.likeText};
 `
 export const DislikeContainer = styled.div`
   display: flex;
@@ -152,7 +154,7 @@ export const BottomContentContainer = styled.div`
   display: flex;
   flex-direction: column;
 `
-export const BottomTitle = styled.h1`
+export const BottomTitle = styled.p`
   color: ${props => (props.isDarkMode ? 'white' : 'black')};
   font-size: 18px;
   font-weight: bold;
@@ -170,4 +172,45 @@ export const BottomDescription = styled.p`
   font-size: 15px;
   font-weight: 800;
   font-family: roboto;
+`
+export const FailureViewContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  text-align: center;
+  background-color: ${props => (props.isDarkMode ? 'black' : 'white')};
+  min-height: 100vh;
+  width: 100%;
+`
+export const FailureImg = styled.img`
+  width: 100%;
+  @media screen and (min-width: 768px) {
+    width: 200px;
+  }
+`
+export const FailureTitle = styled.h1`
+  color: ${props => (props.isDarkMode ? 'white' : 'black')};
+  font-size: 25px;
+  font-weight: bold;
+  font-family: roboto;
+`
+export const FailureDescription = styled.p`
+  color: ${props => (props.isDarkMode ? 'white' : 'black')};
+  font-size: 15px;
+  font-weight: 800;
+  font-family: roboto;
+`
+export const FailureRetryBtn = styled.button`
+  color: ${props => (props.isDarkMode ? 'white' : 'black')};
+  font-size: 18px;
+  font-weight: bold;
+  font-family: roboto;
+  height: 40px;
+  width: 100px;
+  border: 1px solid transparent;
+  background-color: #4f46e5;
+  border-radius: 8px;
+  cursor: pointer;
 `

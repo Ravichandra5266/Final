@@ -24,7 +24,7 @@ import './App.css'
 
 class App extends Component {
   state = {
-    isDarkMode: true,
+    isDarkMode: false,
     activeTab: '',
     savedVideos: [],
   }
@@ -39,11 +39,26 @@ class App extends Component {
   }
 
   onSaveVideo = eachItemVideo => {
-    console.log(eachItemVideo)
+    const {savedVideos} = this.state
+    this.setState(prevState => ({
+      savedVideos: [...prevState.savedVideos, eachItemVideo],
+    }))
+  }
+
+  onRemoveVideo = id => {
+    const {savedVideos} = this.state
+    const filterVideos = savedVideos.filter(eachVideo => {
+      if (eachVideo.id !== id) {
+        return eachVideo
+      }
+      return null
+    })
+    this.setState({savedVideos: filterVideos})
   }
 
   render() {
     const {isDarkMode, activeTab, savedVideos} = this.state
+
     return (
       <ContextMessage.Provider
         value={{
@@ -53,6 +68,7 @@ class App extends Component {
           onChangeTab: this.onChangeTab,
           savedVideos,
           onSaveVideo: this.onSaveVideo,
+          onRemoveVideo: this.onRemoveVideo,
         }}
       >
         <Switch>

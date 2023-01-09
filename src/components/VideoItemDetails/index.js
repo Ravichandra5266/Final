@@ -40,6 +40,11 @@ import {
   BottomTitle,
   BottomSubscriber,
   BottomDescription,
+  FailureDescription,
+  FailureImg,
+  FailureRetryBtn,
+  FailureViewContainer,
+  FailureTitle,
 } from './styledComponents'
 
 import Header from '../Header'
@@ -116,11 +121,56 @@ class VideoItemDetails extends Component {
         urlStatus: ApiStatusConstant.success,
         videoDetails: updatedData,
       })
+    } else {
+      this.setState({urlStatus: ApiStatusConstant.failure})
     }
   }
 
+  onClickRetry = () => {
+    this.getVideoItemDetailsApiUrl()
+  }
+
+  renderFailureView = () => (
+    <ContextMessage.Consumer>
+      {value => {
+        const {isDarkMode} = value
+        return (
+          <FailureViewContainer isDarkMode={isDarkMode}>
+            {isDarkMode ? (
+              <FailureImg
+                src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png"
+                alt="failure view"
+              />
+            ) : (
+              <FailureImg
+                src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
+                alt="failure view"
+              />
+            )}
+            <FailureTitle isDarkMode={isDarkMode}>
+              Oops! Something Went Wrong
+            </FailureTitle>
+            <FailureDescription isDarkMode={isDarkMode}>
+              We are having some trouble to complete your request. Please try
+              again.
+              <br />
+              Please try agin
+            </FailureDescription>
+            <FailureRetryBtn
+              isDarkMode={isDarkMode}
+              type="button"
+              onClick={this.onClickRetry}
+            >
+              Retry
+            </FailureRetryBtn>
+          </FailureViewContainer>
+        )
+      }}
+    </ContextMessage.Consumer>
+  )
+
   renderSpinnerView = () => (
-    <SpinnerContainer>
+    <SpinnerContainer data-testid="loader">
       <Loader type="ThreeDots" height="50" width="50" color="blue" />
     </SpinnerContainer>
   )
@@ -141,12 +191,12 @@ class VideoItemDetails extends Component {
     return (
       <ContextMessage.Consumer>
         {value => {
-          const {isDarkMode, onSaveVideo} = value
+          const {isDarkMode, onSaveVideo, onRemoveVideo} = value
           const {isSave, isLike, isDislike} = this.state
           const textColor = isDarkMode ? '#64748b' : '#64748b'
           const saveText = isSave ? ' #2563eb' : `${textColor}`
           const likeText = isLike ? ' #2563eb' : `${textColor}`
-          const disLikeText = isDislike ? ' #2563eb' : `${textColor}`
+          const disLikeText = isDislike ? '#2563eb' : `${textColor}`
 
           this.onClickSave = () => {
             this.setState({isSave: !isSave})
@@ -173,22 +223,34 @@ class VideoItemDetails extends Component {
                   <VideoPost isDarkMode={isDarkMode}>{posted}</VideoPost>
                 </FlexContainerViewPost>
                 <VideoLikeDislikeSaveControls>
-                  <LikeButton type="button" onClick={this.onClickLike}>
-                    <LikeContainer likeText={likeText}>
+                  <LikeButton
+                    type="button"
+                    onClick={this.onClickLike}
+                    likeText={likeText}
+                  >
+                    <LikeContainer>
                       <BiLike className="control-icons" />
                       <LikeText>Like</LikeText>
                     </LikeContainer>
                   </LikeButton>
 
-                  <DislikeButton type="button" onClick={this.onClickDislike}>
-                    <DislikeContainer disLikeText={disLikeText}>
+                  <DislikeButton
+                    type="button"
+                    onClick={this.onClickDislike}
+                    disLikeText={disLikeText}
+                  >
+                    <DislikeContainer>
                       <BiDislike className="control-icons" />
                       <DislikeText>Dislike</DislikeText>
                     </DislikeContainer>
                   </DislikeButton>
 
-                  <SaveButton type="button" onClick={this.onClickSave}>
-                    <SaveContainer saveText={saveText}>
+                  <SaveButton
+                    type="button"
+                    onClick={this.onClickSave}
+                    saveText={saveText}
+                  >
+                    <SaveContainer>
                       <GiSave className="control-icons" />
                       <SaveText>Save</SaveText>
                     </SaveContainer>
@@ -199,7 +261,7 @@ class VideoItemDetails extends Component {
               <BottomVideoContentContainer>
                 <BottomLogo
                   src={videoDetails.profileImageUrl}
-                  alt={videoDetails.name}
+                  alt="channel logo"
                 />
                 <BottomContentContainer>
                   <BottomTitle isDarkMode={isDarkMode}>
@@ -248,7 +310,7 @@ class VideoItemDetails extends Component {
         {value => {
           const {isDarkMode} = value
           return (
-            <Container isDarkMode={isDarkMode}>
+            <Container data-testid="videoItemDetails" isDarkMode={isDarkMode}>
               <Header />
               <VideoItemContainer>
                 <Sidebar />

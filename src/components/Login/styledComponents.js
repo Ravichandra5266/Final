@@ -73,14 +73,14 @@ export const FlexContainer = styled.div`
   align-items: center;
 `
 export const LoginBtn = styled.button`
-  color: black;
+  color: #ffffff;
   font-size: 18px;
   font-weight: bold;
   font-family: roboto;
   height: 40px;
   width: 100px;
   cursor: pointer;
-  background-color: aqua;
+  background-color: black;
   border: 1px solid transparent;
   border-radius: 8px;
   margin-top: 15px;

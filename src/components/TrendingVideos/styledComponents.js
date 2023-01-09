@@ -32,7 +32,7 @@ export const Content = styled.div`
   justify-content: flex-start;
 `
 
-export const Title = styled.h1`
+export const Title = styled.p`
   color: ${props => (props.isDarkMode ? 'white' : 'black')};
   font-size: 20px;
   font-weight: bold;

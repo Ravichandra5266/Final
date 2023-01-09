@@ -21,9 +21,14 @@ import {
   TrendingVideosListContainer,
   TrendingHeading,
   Heading,
+  FailureImg,
+  FailureViewContainer,
+  Description,
+  RetryBtn,
 } from './styledComponents'
 
 import './index.css'
+import {Title} from '../TrendingVideos/styledComponents'
 
 const ApiStatusConstant = {
   initial: 'INITIAL',
@@ -84,11 +89,37 @@ class Trending extends Component {
         urlStatus: ApiStatusConstant.success,
         trendingVideoData: updatedData,
       })
+    } else {
+      this.setState({urlStatus: ApiStatusConstant.failure})
     }
   }
 
+  onClickRetryPage = () => {
+    this.getTrendingVideosApiUrl()
+  }
+
+  renderFailureView = () => (
+    <ContextMessage.Consumer>
+      {value => {
+        const {isDarkMode} = value
+        return (
+          <FailureViewContainer isDarkMode={isDarkMode}>
+            {isDarkMode ? (
+              <FailureImg src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png" />
+            ) : (
+              <FailureImg src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png" />
+            )}
+            <Title>Oops! Something Went Wrong</Title>
+            <Description>We are having some trouble</Description>
+            <RetryBtn onClick={this.onClickRetryPage}>Retry</RetryBtn>
+          </FailureViewContainer>
+        )
+      }}
+    </ContextMessage.Consumer>
+  )
+
   renderSpinnerView = () => (
-    <SpinnerContainer>
+    <SpinnerContainer data-testid="loader">
       <Loader type="ThreeDots" color="blue" height="50" width="50" />
     </SpinnerContainer>
   )
@@ -147,9 +178,12 @@ class Trending extends Component {
           return (
             <>
               <Header />
-              <Container isDarkMode={isDarkMode}>
+              <Container data-testid="trending" isDarkMode={isDarkMode}>
                 <Sidebar />
-                <TrendingContainer isDarkMode={isDarkMode}>
+                <TrendingContainer
+                  data-testid="trending"
+                  isDarkMode={isDarkMode}
+                >
                   {this.renderSwitchCondition()}
                 </TrendingContainer>
               </Container>

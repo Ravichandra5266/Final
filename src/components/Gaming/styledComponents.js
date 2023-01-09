@@ -83,7 +83,7 @@ export const GameImg = styled.img`
     height: 300px;
   }
 `
-export const GameTitle = styled.h1`
+export const GameTitle = styled.p`
   color: ${props => (props.isDarkMode ? 'white' : 'black')};
   font-size: 18px;
   font-weight: bold;
@@ -96,4 +96,38 @@ export const GameSubTitle = styled.p`
   font-weight: 800;
   font-family: roboto;
   text-align: center;
+`
+export const FailureViewContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  color: ${props => (props.isDarkMode ? 'white' : 'black')};
+  background-color: ${props => (props.isDarkMode ? 'black' : 'white')};
+`
+export const FailureImg = styled.img`
+  width: 200px;
+`
+export const Title = styled.h1`
+  font-size: 22px;
+  font-weight: bold;
+  font-family: roboto;
+`
+export const Description = styled.p`
+  font-size: 18px;
+  font-weight: 500;
+  font-family: roboto;
+`
+export const RetryBtn = styled.button`
+  font-size: 18px;
+  font-weight: bold;
+  font-family: roboto;
+  cursor: pointer;
+  height: 40px;
+  width: 100px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background-color: #3b82f6;
 `

@@ -104,7 +104,7 @@ class Home extends Component {
         Authorization: `Bearer ${token}`,
       },
     }
-    console.log(homeVideosApiUrl)
+    // console.log(homeVideosApiUrl)
     const requestUrl = await fetch(homeVideosApiUrl, options)
     const responseData = await requestUrl.json()
     // console.log(responseData)
@@ -116,7 +116,7 @@ class Home extends Component {
   }
 
   renderSpinnerView = () => (
-    <SpinnerContainer>
+    <SpinnerContainer data-testid="loader">
       <Loader type="ThreeDots" height="50" width="50" color="blue" />
     </SpinnerContainer>
   )
@@ -141,7 +141,7 @@ class Home extends Component {
               <EmptySearchContainer>
                 <EmptySearchImg
                   src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png"
-                  alt="no search results"
+                  alt="no videos"
                 />
                 <EmptySearchTitle isDarkMode={isDarkMode}>
                   No Search results found
@@ -182,11 +182,11 @@ class Home extends Component {
             ) : (
               <FailureImg
                 src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
-                alt="failure"
+                alt="failure view"
               />
             )}
             <FailureTitle isDarkMode={isDarkMode}>
-              Oops!Something Went Wrong
+              Oops! Something Went Wrong
             </FailureTitle>
             <FailureDescription isDarkMode={isDarkMode}>
               We are having some trouble to complete your request.
@@ -241,21 +241,22 @@ class Home extends Component {
           return (
             <>
               <Header />
-              <HomePageContainer isDarkMode={isDarkMode}>
+              <HomePageContainer data-testid="home" isDarkMode={isDarkMode}>
                 <Sidebar />
                 <HomeContentContainer>
                   {isBannerClosed ? (
                     ''
                   ) : (
-                    <BannerSectionContainer>
+                    <BannerSectionContainer data-testid="banner">
                       <FlexContainer>
                         <BannerSectionLogo
                           src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-                          alt="website logo"
+                          alt="nxt watch logo"
                         />
 
                         <CloseIcon
                           type="button"
+                          data-testid="close"
                           onClick={this.onClickCloseBanner}
                         >
                           <AiOutlineCloseCircle className="close-icon" />
@@ -276,7 +277,11 @@ class Home extends Component {
                       isDarkMode={isDarkMode}
                     />
                     <SearchIconContainer>
-                      <SearchBtn type="button" onClick={this.onClickSearch}>
+                      <SearchBtn
+                        type="button"
+                        data-testid="searchButton"
+                        onClick={this.onClickSearch}
+                      >
                         <BsSearch className={SearchIconColor} />
                       </SearchBtn>
                     </SearchIconContainer>

@@ -44,7 +44,7 @@ export const SidebarBottomContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
 `
-export const SidebarBottomHeading = styled.h1`
+export const SidebarBottomHeading = styled.p`
   color: ${props => (props.isDarkMode ? 'white' : 'black')};
   font-size: 20px;
   font-weight: bold;

@@ -34,7 +34,7 @@ const NotFound = () => (
             )}
             <Title isDarkMode={isDarkMode}>Page Not Found</Title>
             <Description isDarkMode={isDarkMode}>
-              We are sorry,the page you requested could not be found.
+              we are sorry, the page you requested could not be found.
             </Description>
           </NotFoundPageContainer>
         </Container>

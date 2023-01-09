@@ -42,7 +42,7 @@ export const VideoLogo = styled.img`
     width: 80px;
   }
 `
-export const VideoTitle = styled.h1`
+export const VideoTitle = styled.p`
   color: ${props => (props.isDarkMode ? 'white' : 'black')};
   font-size: 18px;
   font-weight: bold;
